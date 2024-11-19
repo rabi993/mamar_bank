@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import dj_database_url
 import environ
 # import os
 env = environ.Env()
@@ -90,15 +91,21 @@ WSGI_APPLICATION = 'mamar_bank.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': env('DB_NAME'),
+#        'USER': env('DB_USER'),
+#        'PASSWORD': env('DB_PASSWORD'),
+#        'HOST': env('DB_HOST'),
+#        'PORT': env('DB_PORT'),
+#    }
+# }
 DATABASES = {
-   'default': {
-       'ENGINE': 'django.db.backends.postgresql_psycopg2',
-       'NAME': env('DB_NAME'),
-       'USER': env('DB_USER'),
-       'PASSWORD': env('DB_PASSWORD'),
-       'HOST': env('DB_HOST'),
-       'PORT': env('DB_PORT'),
-   }
+    'default': dj_database_url.config(
+        # Feel free to alter this value to suit your needs.
+        default='postgresql://mamarbank_cdny_user:tSvIOo5fHXe86O9GsL9YI9xFi7FytsEs@dpg-csu1knlumphs738kf3kg-a.oregon-postgres.render.com/mamarbank_cdny',
+    )
 }
 
 
