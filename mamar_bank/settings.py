@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # your secret key
 # SECRET_KEY = env("SECRET_KEY")
-SECRET_KEY = env("SECRET_KEY", default="your-default-secret-key")
+SECRET_KEY = env("SECRET_KEY", default="9af5e15018816396e650eaa8c8638dbf")
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
