@@ -101,10 +101,11 @@ WSGI_APPLICATION = 'mamar_bank.wsgi.application'
 #        'PORT': env('DB_PORT'),
 #    }
 # }
+
 DATABASES = {
     'default': dj_database_url.config(
         # Feel free to alter this value to suit your needs.
-        default='postgresql://mamarbank_cdny_user:tSvIOo5fHXe86O9GsL9YI9xFi7FytsEs@dpg-csu1knlumphs738kf3kg-a.oregon-postgres.render.com/mamarbank_cdny',
+        default='postgresql://mamar_bank_ek3x_user:XBFflVzu16ROCXMQpZAlS9MwHf6eWqhf@dpg-ct2mndpu0jms738t24q0-a.oregon-postgres.render.com/mamar_bank_ek3x',
     )
 }
 
