@@ -12,6 +12,11 @@ from datetime import datetime
 from django.db.models import Sum
 from django.views import View
 from django.urls import reverse_lazy
+from transactions.forms import (
+    DepositForm,
+    WithdrawForm,
+    LoanRequestForm,
+)
 
 from transactions.models import Transaction
 from accounts.models import UserBankAccount
@@ -192,3 +197,33 @@ class LoanListView(LoginRequiredMixin,ListView):
         print(queryset)
         return queryset
 
+from django.urls import reverse_lazy
+from django.views.generic.edit import FormView
+from .forms import TransactionForm
+
+class TransferView(FormView):
+    template_name = 'transactions/transfer.html'
+    form_class = TransactionForm
+    success_url = reverse_lazy('transfer')  # Replace 'success' with your success URL name
+
+    def form_valid(self, form):
+        # Process the form data here (e.g., save to database)
+        account_number = form.cleaned_data['account_number']
+        amount = form.cleaned_data['amount']
+        user_account = UserBankAccount.objects.filter(account_no=account_number).first()
+        print(user_account)
+        if amount > self.request.user.account.balance:
+            messages.error(
+            self.request,
+            f'Transfer amount is greater than available balance'
+            )
+            return redirect('transfer')
+        user_account.balance += amount
+        self.request.user.account.balance -= amount
+        messages.success(
+            self.request,
+            f'Transfer Done'
+            )
+        print(account_number, amount)
+        # You can perform actions with account_number and amount here
+        return super().form_valid(form)
