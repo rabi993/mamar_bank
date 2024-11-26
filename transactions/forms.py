@@ -63,7 +63,7 @@ class LoanRequestForm(TransactionForm):
     
 
 
-class TransactionForm(forms.Form):
+class TransferForm(forms.Form):
     account_number = forms.CharField(label='Account Number')
     amount = forms.DecimalField(label='Amount')
     
